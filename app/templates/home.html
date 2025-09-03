@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Home · SahAI 🌱{% endblock %}
+{% block content %}
+
+<section class="py-5 my-5 rounded-4 container pastel-hero">
+  <div class="row align-items-center g-4">
+    <div class="col-md-7">
+      <h1 class="display-5 fw-bold mb-3">Your safe, supportive space for mental wellness.</h1>
+      <p class="lead mb-4">
+        SahAI is a gentle companion designed for youth — privacy-first, stigma-free, and always kind.
+      </p>
+
+      {% if current_user.is_authenticated %}
+        <div class="d-flex gap-3">
+          <a class="btn btn-primary btn-lg shadow-sm" href="{{ url_for('user.user_profile') }}">
+            <i class="bi bi-person-circle"></i> Go to your space
+          </a>
+          <form action="{{ url_for('auth.logout') }}" method="post" class="d-inline">
+            {# If you use Flask-WTF CSRF, include a token: #}
+            {% if csrf_token is defined %} <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> {% endif %}
+            <button class="btn btn-outline-secondary btn-lg shadow-sm" type="submit">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </form>
+        </div>
+      {% else %}
+        <div class="d-flex gap-3">
+          <a class="btn btn-primary btn-lg shadow-sm" href="{{ url_for('auth.login') }}">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </a>
+          <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url_for('auth.register') }}">
+            <i class="bi bi-person-plus"></i> Register
+          </a>
+        </div>
+        <p class="text-muted small mt-3">
+          (Create an account or sign in to start journaling and exploring wellness features.)
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="col-md-5">
+      <!-- carousel unchanged -->
+      <div id="heroCarousel" class="carousel slide carousel-fade rounded-4 overflow-hidden shadow-sm" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active p-5 text-center bg-white">
+            <i class="bi bi-stars display-4 d-block mb-2 text-primary"></i>
+            <h2 class="h4">Be kind to your mind</h2>
+            <p class="mb-0 text-muted">Small steps. Big changes.</p>
+          </div>
+          <div class="carousel-item p-5 text-center bg-white">
+            <i class="bi bi-earbuds display-4 d-block mb-2 text-success"></i>
+            <h2 class="h4">Take a deep breath</h2>
+            <p class="mb-0 text-muted">You’re doing better than you think.</p>
+          </div>
+          <div class="carousel-item p-5 text-center bg-white">
+            <i class="bi bi-brush display-4 d-block mb-2 text-info"></i>
+            <h2 class="h4">Express yourself</h2>
+            <p class="mb-0 text-muted">Write, draw, reflect — safely and privately.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set page_title = "New Journal Entry" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-journal-richtext fs-3 me-2 text-success"></i>
+            <h1 class="h4 m-0">Your safe, supportive space for mental wellness.</h1>
+          </div>
+
+          <form method="POST" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3 position-relative">
+              <label for="{{ form.text.id }}" class="form-label">Journal</label>
+              {{ form.text(class_="form-control form-control-lg rounded-3", aria_label="Journal text area") }}
+              {% for e in form.text.errors %}
+                <div class="invalid-feedback d-block">{{ e }}</div>
+              {% endfor %}
+              <div class="form-text">Tip: You can also use voice dictation (Chrome) — tap the mic.</div>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <button type="button" id="micBtn" class="btn btn-outline-secondary rounded-pill" aria-label="Start voice dictation">
+                <i class="bi bi-mic"></i> <span class="ms-1">Speak</span>
+              </button>
+              <div id="micStatus" class="text-muted small">Mic idle</div>
+            </div>
+
+            <div class="form-check form-switch mb-3">
+              {{ form.store_raw(class_="form-check-input", id="storeRawSwitch", aria_label="Store raw entry") }}
+              <label class="form-check-label" for="storeRawSwitch">
+                Store my raw entry (optional)
+              </label>
+              <div class="form-text">By default we only save a privacy-preserving summary.</div>
+            </div>
+
+            <div>
+              {{ form.submit(class_="btn btn-success btn-lg rounded-pill px-4") }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3 rounded-3">
+        <i class="bi bi-shield-heart me-2"></i>
+        We gently screen for crisis phrases to keep you safe. If we notice anything urgent, we’ll show grounding steps and helplines.
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/journal_voice.js') }}"></script>
+{% endblock %}

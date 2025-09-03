@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set page_title = "Artwork" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="h5 mb-3"><i class="bi bi-image text-success me-2"></i>Artwork</h1>
+          <div class="text-center mb-3">
+            <img src="{{ url_for('static', filename=item.file_path) }}" alt="Abstract art" class="img-fluid rounded-3 border">
+            <p>{{item.file_path}}</p>
+          </div>
+          {% if item.caption %}<p class="lead">{{ item.caption }}</p>{% endif %}
+          <a download class="btn btn-outline-success rounded-pill" href="{{ url_for('static', filename='uploads/' + asset.file_path.split('/')[-1]) }}">
+            <i class="bi bi-download"></i> Download
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

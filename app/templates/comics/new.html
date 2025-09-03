@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set page_title = "AI Comics" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h5 mb-3"><i class="bi bi-journal-richtext text-success me-2"></i>Create a Comic</h1>
+          <form method="POST">
+            {{ form.csrf_token }}
+            <div class="mb-3">
+              <label class="form-label" for="{{ form.situation.id }}">Situation</label>
+              {{ form.situation(class_="form-control rounded-3") }}
+              {% for e in form.situation.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+            </div>
+            {{ form.submit(class_="btn btn-success rounded-pill") }}
+          </form>
+          <p class="small text-muted mt-3">We write a 3–4 panel script and generate images privately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

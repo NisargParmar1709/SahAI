@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% set page_title = "Letter" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h5 m-0"><i class="bi bi-envelope-open-heart text-success me-2"></i>{{ item.title }}</h1>
+            <a href="{{ url_for('letters.letters_new') }}" class="btn btn-outline-success btn-sm rounded-pill"><i class="bi bi-arrow-left"></i> Back</a>
+          </div>
+          <hr>
+          {% if not is_open %}
+            <div class="text-center py-4">
+              <i class="bi bi-lock-fill fs-1 text-muted d-block mb-2"></i>
+              <p class="lead">Come back in <span id="unlockCountdown"></span> to open your letter.</p>
+              <div class="small text-muted">Opens on {{ item.open_after.strftime("%b %d, %Y") }}</div>
+            </div>
+            <script>
+              const unlockAt = new Date("{{ item.open_after.isoformat() }}Z");
+            </script>
+            <script src="{{ url_for('static', filename='js/letter_unlock.js') }}"></script>
+          {% else %}
+            <div class="letter-body">
+              <p class="mb-3">{{ item.letter_text }}</p>
+              {% if reflection %}
+              <div class="alert alert-info rounded-3 mt-3">
+                <strong>Reflection:</strong> {{ reflection }}
+              </div>
+              {% endif %}
+              {% if item.opened_at %}
+                <div class="small text-muted mt-2">First opened on {{ item.opened_at.strftime("%b %d, %Y %H:%M") }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

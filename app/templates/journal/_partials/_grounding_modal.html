@@ -1,0 +1,42 @@
+{% if not show_as_page %}
+<div class="modal fade" id="groundingModal" tabindex="-1" aria-hidden="true" aria-labelledby="groundingTitle">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="groundingTitle"><i class="bi bi-heart-pulse-fill text-danger me-2"></i>You matter. Let’s pause together.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% include "journal/_partials/_grounding_modal.html" with context %}
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<main class="container py-5">
+  <div class="card shadow-sm rounded-4 border-0">
+    <div class="card-body p-4">
+      <h1 class="h4 mb-3"><i class="bi bi-heart-pulse-fill text-danger me-2"></i>You matter. Let’s pause together.</h1>
+      <p class="lead">We noticed words that could mean you’re going through a tough moment. Here are quick grounding steps—no judgment, just care.</p>
+      <hr>
+      <h2 class="h6">4–7–8 Breathing</h2>
+      <p>Inhale 4 • Hold 7 • Exhale 8. Repeat 4 times.</p>
+      <h2 class="h6 mt-3">5–4–3–2–1 Grounding</h2>
+      <ul class="mb-3">
+        <li>5 things you can see</li>
+        <li>4 things you can touch</li>
+        <li>3 things you can hear</li>
+        <li>2 things you can smell</li>
+        <li>1 thing you can taste</li>
+      </ul>
+      <div class="alert alert-info">
+        India helpline (placeholder): <strong>9152987821</strong> • Reach out to a trusted adult.
+      </div>
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary rounded-pill"><i class="bi bi-house"></i> Back to Home</a>
+        <a href="{{ url_for('journal.journal_new') }}" class="btn btn-success rounded-pill"><i class="bi bi-journal-plus"></i> Try again</a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endif %}

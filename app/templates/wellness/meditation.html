@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% set page_title = "Mini-Meditation" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card rounded-4 shadow-sm h-100">
+        <div class="card-body">
+          <h1 class="h5 mb-3"><i class="bi bi-flower1 text-success me-2"></i>Mini-Meditation</h1>
+          <p class="text-muted">Pick a mood or we’ll use your latest detected emotion (if available).</p>
+
+          {% include "wellness/_partials/_mood_chips.html" %}
+
+          <form method="POST" class="mt-3">
+            {{ form.csrf_token }}
+            {{ form.emotions(id="emotions") }}
+            <div class="mb-3">
+              <label for="{{ form.duration_hint.id }}" class="form-label">Duration</label>
+              {{ form.duration_hint(class_="form-select rounded-3") }}
+            </div>
+            {{ form.submit(class_="btn btn-success rounded-pill") }}
+          </form>
+
+          <div class="mt-3 small text-muted">Tip: Try 3 minutes for a quick reset.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <div class="card rounded-4 shadow-sm h-100">
+        <div class="card-body">
+          {% if plan %}
+            <div class="d-flex align-items-center justify-content-between">
+              <h2 class="h6 m-0">{{ plan.title }} • {{ plan.duration_sec // 60 }} min</h2>
+              {% include "wellness/_partials/_tts_controls.html" %}
+            </div>
+            <hr>
+            {% include "wellness/_partials/_timer_widget.html" %}
+            <ol class="mt-3">
+              {% for s in plan.steps %}
+                <li class="mb-2 step-line">{{ s }}</li>
+              {% endfor %}
+            </ol>
+            <script>
+              const ttsText = `{{ plan.title }}. {{ plan.steps|join('. ')|replace('"', "'") }}`;
+            </script>
+          {% else %}
+            <div class="text-center text-muted py-5">
+              <i class="bi bi-magic fs-1 d-block mb-2"></i>
+              <p>Choose a mood and duration, then click <strong>Generate Plan</strong>.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Mood chip → hidden emotions field
+  (function () {
+    const chips = document.querySelectorAll('[data-mood-chip]');
+    const tgt = document.getElementById('emotions');
+    if (!chips || !tgt) return;
+    let set = new Set();
+    chips.forEach(c => c.addEventListener('click', function() {
+      const val = this.dataset.moodChip;
+      if (set.has(val)) { set.delete(val); this.classList.remove('active'); }
+      else { set.add(val); this.classList.add('active'); }
+      tgt.value = Array.from(set).join(',');
+    }));
+  })();
+</script>
+<script src="{{ url_for('static', filename='js/tts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+{% endblock %}

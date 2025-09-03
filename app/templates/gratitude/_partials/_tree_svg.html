@@ -1,0 +1,17 @@
+<svg id="gratitudeTree" class="gratitude-tree" viewBox="0 0 600 380" role="img" aria-label="Animated gratitude tree">
+  <!-- trunk -->
+  <path d="M300 360 L300 240 C300 210 265 200 265 170 C265 140 300 130 300 110 C300 80 330 70 340 90 C350 110 330 130 330 150 C330 170 360 175 360 200 C360 230 330 240 330 260 L330 360 Z"
+        fill="#8d6e63" opacity=".95"></path>
+  <!-- branches -->
+  <path d="M300 220 C270 210 250 190 230 170" stroke="#795548" stroke-width="8" fill="none"/>
+  <path d="M300 210 C330 200 360 180 380 160" stroke="#795548" stroke-width="8" fill="none"/>
+  <path d="M290 180 C260 170 240 150 220 140" stroke="#795548" stroke-width="7" fill="none"/>
+  <path d="M310 175 C340 165 360 145 385 135" stroke="#795548" stroke-width="7" fill="none"/>
+  <!-- leaves will be injected by JS -->
+  <g id="leavesLayer" aria-hidden="true"></g>
+</svg>
+<script>
+  window.__SahAI_LEAVES__ = {{ leaves_count | default(0) }};
+  window.__SahAI_STREAK__ = {{ current_streak | default(0) }};
+</script>
+

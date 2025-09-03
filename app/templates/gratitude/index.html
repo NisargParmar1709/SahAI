@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% set page_title = "Gratitude Tree" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in" aria-label="Gratitude Tree page">
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="h5 mb-3" aria-label="Your Gratitude Tree">
+            <i class="bi bi-tree-fill text-success me-2" aria-hidden="true"></i> Your Gratitude Tree
+          </h1>
+          <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+            <span class="badge bg-success rounded-pill" aria-label="Leaves count">{{ leaves_count }} leaves</span>
+            <span class="badge bg-info rounded-pill" aria-label="Current streak">{{ current_streak }} day streak</span>
+            <span class="badge bg-secondary rounded-pill" aria-label="Longest streak">best {{ longest_streak }}</span>
+          </div>
+          {% include "gratitude/_partials/_tree_svg.html" %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h2 class="h6 mb-2"><i class="bi bi-heart-fill text-success me-2" aria-hidden="true"></i>Add a leaf</h2>
+          {% if has_today %}
+            <div class="alert alert-success rounded-3" role="status">
+              You’ve already added gratitude today — lovely! Come back tomorrow 🌞
+            </div>
+          {% else %}
+            <form method="POST" aria-label="Add gratitude form">
+              {{ form.csrf_token }}
+              <div class="mb-2">
+                <label class="form-label visually-hidden" for="{{ form.content.id }}">Gratitude text</label>
+                {{ form.content(class_="form-control rounded-3", aria_label="Gratitude text") }}
+                <div id="gratitudeHelp" class="form-text">Keep it short (≤ 200 chars). One per day.</div>
+                {% for e in form.content.errors %}
+                  <div class="invalid-feedback d-block" role="alert">{{ e }}</div>
+                {% endfor %}
+              </div>
+              {{ form.submit(class_="btn btn-success rounded-pill", aria_label="Add leaf") }}
+            </form>
+          {% endif %}
+          <hr>
+          <h3 class="h6 text-muted">Recent</h3>
+          <ul class="list-unstyled small">
+            {% for e in entries %}
+              <li class="mb-1"><i class="bi bi-leaf-fill text-success me-1" aria-hidden="true"></i>{{ e.content }}</li>
+            {% else %}
+              <li class="text-muted">Your first leaf is waiting.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="{{ url_for('static', filename='js/tree.js') }}"></script>
+{% endblock %}

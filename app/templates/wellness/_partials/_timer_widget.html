@@ -1,0 +1,8 @@
+<div class="timer-wrap">
+  <div class="timer-display" id="timerDisplay" aria-live="polite">00:00</div>
+  <div class="btn-group mt-2" role="group" aria-label="Timer controls">
+    <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onclick="timerStart({{ plan.duration_sec if plan else 180 }})"><i class="bi bi-play"></i> Start</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" onclick="timerPause()"><i class="bi bi-pause"></i> Pause</button>
+    <button type="button" class="btn btn-outline-danger btn-sm rounded-pill" onclick="timerReset()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+  </div>
+</div>

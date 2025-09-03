@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% set page_title = 'Not Found' %}
+{% block content %}
+<main class="container py-5">
+  <div class="text-center">
+    <h1 class="display-6 text-warning mb-3">Page Not Found</h1>
+    <p class="lead">The page you're looking for doesn't exist.</p>
+    <p class="text-muted">Request ID: <code>{{ request_id }}</code></p>
+    <a href="/" class="btn btn-outline-primary rounded-pill mt-3">Go Home</a>
+  </div>
+</main>
+{% endblock %}

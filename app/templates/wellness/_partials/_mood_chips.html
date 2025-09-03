@@ -1,0 +1,33 @@
+<div class="btn-group flex-wrap" role="group" aria-label="Select mood chips">
+  {% set moods = [
+    'calm',
+    'anxious',
+    'sad',
+    'angry',
+    'hopeful',
+    'tired',
+    'stressed',
+    'motivated',
+    'happy',
+    'lonely',
+    'confused',
+    'grateful',
+    'excited',
+    'frustrated',
+    'guilty',
+    'embarrassed',
+    'insecure',
+    'relieved',
+    'proud',
+    'focused'
+] %}
+
+  {% for m in moods %}
+  <button type="button" class="btn btn-outline-success btn-sm rounded-pill me-1 mb-1" data-mood-chip="{{ m }}">
+    {{ m }}
+  </button>
+  {% endfor %}
+  {% if detected %}
+  <span class="badge bg-info rounded-pill ms-2">Detected: {{ detected }}</span>
+  {% endif %}
+</div>

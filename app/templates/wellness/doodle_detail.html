@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set page_title = "Doodle" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="h5 mb-3"><i class="bi bi-brush text-success me-2"></i>Your Doodle</h1>
+          <div class="text-center">
+            <img src="{{ url_for('static', filename=doodle.image_path) }}" alt="User doodle" class="img-fluid rounded-3 border">
+          </div>
+          <hr>
+          <h2 class="h6 text-muted mb-2"><i class="bi bi-heart me-1"></i>AI Interpretation</h2>
+          <p class="lead">{{ doodle.ai_interpretation }}</p>
+          <div class="d-flex gap-2">
+            <a href="{{ url_for('journal.journal_new') }}" class="btn btn-outline-success rounded-pill">
+              <i class="bi bi-journal-plus"></i> Add to Journal
+            </a>
+            <a href="{{ url_for('wellness.wellness_doodle_new') }}" class="btn btn-outline-secondary rounded-pill">
+              <i class="bi bi-brush"></i> New Doodle
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

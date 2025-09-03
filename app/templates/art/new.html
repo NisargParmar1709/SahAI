@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set page_title = "Mood-to-Art" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h5 mb-3"><i class="bi bi-palette-fill text-success me-2"></i>Mood-to-Art</h1>
+          <form method="POST">
+            {{ form.csrf_token }}
+            <div class="form-check form-switch mb-3">
+              {{ form.use_last_journal(class_="form-check-input", id="use_last") }}
+              <label class="form-check-label" for="use_last">Use last journal summary</label>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="{{ form.mood_text.id }}">Describe mood (optional)</label>
+              {{ form.mood_text(class_="form-control rounded-3") }}
+            </div>
+            {{ form.submit(class_="btn btn-success rounded-pill") }}
+            <a class="btn btn-outline-success rounded-pill ms-2" href="{{ url_for('art.art_gallery') }}"><i class="bi bi-images"></i> My Gallery</a>
+          </form>
+          <p class="small text-muted mt-3">We create abstract, supportive artwork — no PII, private to you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

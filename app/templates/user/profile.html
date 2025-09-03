@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}My Profile · SahAI{% endblock %}
+{% block content %}
+<div class="container row my-5 g-4">
+  <div class="col-lg-4">
+    <div class="card text-center">
+      <div class="card-body p-4">
+        <div class="mb-3">
+          {% if current_user.avatar_path %}
+            <img src="{{ url_for('static', filename=current_user.avatar_path.split('static/')[-1]) }}"
+                 class="rounded-circle shadow-sm" width="120" height="120" alt="Avatar">
+          {% else %}
+            <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
+                 style="width:120px;height:120px;">
+              <i class="bi bi-person text-secondary" style="font-size:3rem;"></i>
+            </div>
+          {% endif %}
+        </div>
+        <h2 class="h5 mb-1">{{ current_user.display_name or current_user.username }}</h2>
+        <div class="text-muted small mb-3">@{{ current_user.username }}</div>
+
+        <div class="progress mb-2" role="progressbar" aria-label="Profile completeness" aria-valuenow="{{ completeness }}" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: 0%">{{ completeness }}%</div>
+        </div>
+        <div class="small text-muted mb-3">Profile completeness</div>
+
+        <a class="btn btn-outline-primary btn-sm" href="{{ url_for('user.user_profile_edit') }}">
+          <i class="bi bi-pencil"></i> Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body p-4">
+        <h3 class="h5 mb-3">About</h3>
+        <p class="text-muted">{{ current_user.bio or "You haven't written a bio yet." }}</p>
+
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Language</dt>
+          <dd class="col-sm-8">
+            {% if current_user.language_pref == 'hi' %}Hindi
+            {% elif current_user.language_pref == 'hinglish' %}Hinglish
+            {% else %}English{% endif %}
+          </dd>
+          <dt class="col-sm-4">Joined</dt>
+          <dd class="col-sm-8">{{ current_user.created_at.strftime("%b %d, %Y") if current_user.created_at else "—" }}</dd>
+          <dt class="col-sm-4">Privacy</dt>
+          <dd class="col-sm-8">
+            Analytics: {{ "On" if current_user.consent_analytics else "Off" }},
+            Research: {{ "On" if current_user.consent_research else "Off" }}
+            <a href="{{ url_for('user.user_privacy') }}" class="ms-2 small">Edit</a>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateProgress(value) {
+    const bar = document.getElementById("progressBar");
+    bar.style.width = value + "%";
+    bar.textContent = value + "%";
+    bar.parentElement.setAttribute("aria-valuenow", value);
+  }
+
+  // Example: set it to 70 dynamically
+  updateProgress(70);
+</script>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set page_title = "Emotion Lens" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <h2 class="h6 m-0"><i class="bi bi-eye text-success me-2"></i>Today’s Lens</h2>
+            <span class="badge bg-success rounded-pill">{{ todays }}</span>
+          </div>
+          <p class="mt-2 text-muted">{{ micro }}</p>
+          <a href="{{ url_for('journal.journal_new') }}" class="btn btn-outline-success btn-sm rounded-pill"><i class="bi bi-journal-plus"></i> Add today’s entry</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h2 class="h6"><i class="bi bi-activity me-2 text-success"></i>Last 7 days – Primary Emotion Score</h2>
+          <canvas id="trendChart" aria-label="Emotion trend line" role="img"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h2 class="h6"><i class="bi bi-grid-3x3-gap me-2 text-success"></i>Weekly Heatmap</h2>
+          <div id="heatmap" class="heatmap-grid" aria-label="Emotion heatmap"></div>
+          <div class="small mt-2 text-muted">Emotions: {{ key_order|join(', ') }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h2 class="h6"><i class="bi bi-pie-chart me-2 text-success"></i>Distribution (30 days)</h2>
+          <canvas id="distChart" aria-label="Emotion distribution chart" role="img"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="" crossorigin="anonymous"></script>
+<script>
+  window.__EMOTION_DATA__ = {
+    daily: {{ daily|tojson }},
+    heatDays: {{ heat_days|tojson }},
+    heatValues: {{ heat_values|tojson }},
+    distCounts: {{ dist_counts|tojson }},
+    keyOrder: {{ key_order|tojson }}
+  };
+</script>
+<script src="{{ url_for('static', filename='js/emotion_charts.js') }}"></script>
+{% endblock %}

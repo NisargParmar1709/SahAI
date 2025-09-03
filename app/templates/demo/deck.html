@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set page_title = "Pitch Deck" %}
+{% block content %}
+<main id="main-content" class="container-fluid py-4 fade-in">
+  <div id="deckCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1537">
+    <div class="carousel-inner">
+      {% for s in slides %}
+      <div class="carousel-item {% if loop.first %}active{% endif %}">
+        <div class="d-flex flex-column align-items-center justify-content-center text-center" style="min-height:80vh;">
+          <h1 class="display-5 mb-3">{{ s.title }}</h1>
+          <p class="lead mx-auto" style="max-width: 720px;">{{ s.content }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev text-success" type="button" data-bs-target="#deckCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#deckCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</main>
+{% endblock %}

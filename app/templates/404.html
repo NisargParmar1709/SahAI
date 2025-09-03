@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Not Found · SahAI{% endblock %}
+{% block content %}
+<div class="container text-center py-5">
+  <div class="display-6 mb-3">We couldn’t find that page, but don’t worry — take a deep breath 💙</div>
+  <p class="text-muted">The link may be broken or the page may have moved.</p>
+  <a class="btn btn-outline-primary mt-3" href="{{ url_for('main.home') }}">
+    <i class="bi bi-arrow-left"></i> Back to Home
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set page_title = "SahAI Demo Guide" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="card rounded-4 shadow-sm">
+    <div class="card-body p-4">
+      <div class="d-flex align-items-center justify-content-between flex-wrap">
+        <h1 class="h5 m-0"><i class="bi bi-stars text-success me-2" aria-hidden="true"></i>Guided Demo</h1>
+        <a href="{{ url_for('music.music_recommend') }}" class="btn btn-outline-success rounded-pill">Start anywhere</a>
+      </div>
+      <p class="text-muted mt-2">Click through these quick stops (≈3 mins total).</p>
+      <div class="row g-3 mt-1">
+        {% for s in steps %}
+        <div class="col-md-6 col-lg-4">
+          <a href="{{ s.href }}" class="text-decoration-none">
+            <div class="card rounded-4 shadow-sm hover-raise h-100" role="region" aria-label="{{ s.title }}">
+              <div class="card-body">
+                <h2 class="h6">{{ loop.index }}. {{ s.title }}</h2>
+                <p class="small text-muted mb-0">{{ s.desc }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

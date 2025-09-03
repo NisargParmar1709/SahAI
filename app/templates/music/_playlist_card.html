@@ -1,0 +1,18 @@
+<div class="col-md-6 col-lg-4">
+  <div class="card playlist-card h-100 rounded-4 shadow-sm">
+    <div class="card-body d-flex flex-column">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-vinyl fs-4 text-success me-2"></i>
+        <h2 class="h6 m-0">{{ p.title }}</h2>
+      </div>
+      <div class="mt-auto d-flex gap-2">
+        <a href="{{ p.youtube }}" target="_blank" rel="noopener" class="btn btn-outline-danger btn-sm rounded-pill" aria-label="Open YouTube">
+          <i class="bi bi-youtube"></i> YouTube
+        </a>
+        <a href="{{ p.spotify }}" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm rounded-pill" aria-label="Open Spotify">
+          <i class="bi bi-spotify"></i> Spotify
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% set page_title = "Auto Demo" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between flex-wrap mb-2">
+    <h1 class="h5 m-0"><i class="bi bi-sliders text-success me-2" aria-hidden="true"></i>Auto Demo (hands-free)</h1>
+    <div>
+      <button id="pauseBtn" class="btn btn-outline-secondary btn-sm rounded-pill me-2"><i class="bi bi-pause"></i> Pause</button>
+      <button id="resumeBtn" class="btn btn-outline-success btn-sm rounded-pill"><i class="bi bi-play"></i> Resume</button>
+    </div>
+  </div>
+
+  <div id="autoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000" aria-label="Auto demo carousel">
+    <div class="carousel-indicators">
+      {% for s in steps %}
+        <button type="button" data-bs-target="#autoCarousel" data-bs-slide-to="{{ loop.index }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+      {% endfor %}
+    </div>
+    <div class="carousel-inner rounded-4 shadow-sm">
+      {% for s in steps %}
+      <div class="carousel-item {% if loop.first %}active{% endif %}">
+        <div class="p-3 border-bottom bg-light">
+          <strong>{{ loop.index }}. {{ s.title }}</strong>
+          <span class="text-muted ms-2">{{ s.desc }}</span>
+          <a class="btn btn-sm btn-success rounded-pill float-end" href="{{ url_for(s.href.strip('/')) }}" target="_blank" rel="noopener">Open</a>
+        </div>
+        <div class="ratio ratio-16x9">
+          <iframe src="{{ url_for(s.href.strip('/')) }}" title="{{ s.title }}" class="rounded-bottom-4"></iframe>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#autoCarousel" data-bs-slide="prev" aria-label="Previous">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#autoCarousel" data-bs-slide="next" aria-label="Next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/demo_auto.js') }}"></script>
+{% endblock %}

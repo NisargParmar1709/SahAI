@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% set page_title = "Anonymous Question Box" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-question-square text-success fs-3 me-2"></i>
+            <h1 class="h5 m-0">Ask anything — anonymously and safely</h1>
+          </div>
+          <p class="text-muted">Your identity is never shown. We moderate for kindness and safety.</p>
+
+          <form method="POST" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3">
+              <label for="{{ form.language.id }}" class="form-label">Language</label>
+              {{ form.language(class_="form-select rounded-3") }}
+            </div>
+            <div class="mb-3 position-relative">
+              <label for="{{ form.question_text.id }}" class="form-label">Your question</label>
+              {{ form.question_text(class_="form-control form-control-lg rounded-3", aria_label="Anonymous question") }}
+              <div class="form-text"><span id="charCount">0</span>/800</div>
+              {% for e in form.question_text.errors %}
+                <div class="invalid-feedback d-block">{{ e }}</div>
+              {% endfor %}
+            </div>
+            <div>
+              {{ form.submit(class_="btn btn-success btn-lg rounded-pill px-4") }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3 rounded-3">
+        <i class="bi bi-shield-lock me-2"></i> We hide emails/phones/links before asking AI. Safety first.
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const ta = document.getElementById("question_text");
+  const cc = document.getElementById("charCount");
+  if (ta && cc) {
+    const update = () => cc.innerText = ta.value.length;
+    ta.addEventListener("input", update);
+    update();
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 2100;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="toast align-items-center text-bg-{{ 'success' if category=='success' else 'danger' if category=='danger' else 'secondary' }} border-0 mb-2"
+             role="status" aria-live="polite" aria-atomic="true" data-bs-delay="4000">
+          <div class="d-flex">
+            <div class="toast-body">{{ message }}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<script>
+  (function () {
+    const elList = [].slice.call(document.querySelectorAll('.toast'));
+    elList.map(el => new bootstrap.Toast(el).show());
+    // custom programmatic toasts (e.g., copy util)
+    window.addEventListener('toast', (e) => {
+      const msg = (e.detail && e.detail.message) || 'Done';
+      const cont = document.querySelector('.toast-container');
+      const wrap = document.createElement('div');
+      wrap.className = 'toast text-bg-success border-0 mb-2';
+      wrap.setAttribute('role', 'status');
+      wrap.innerHTML = '<div class="d-flex"><div class="toast-body">'+msg+'</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>';
+      cont.appendChild(wrap);
+      new bootstrap.Toast(wrap, {delay: 3000}).show();
+    });
+  })();
+</script>

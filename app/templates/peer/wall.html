@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% set page_title = "Peer Wall" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="h5 mb-3"><i class="bi bi-people text-success me-2"></i>Peer Wall</h1>
+          <p class="text-muted">Post supportive notes anonymously. Everyone sees only first names hidden.</p>
+          <form method="POST">
+            {{ form.csrf_token }}
+            {{ form.body(class_="form-control rounded-3 mb-2") }}
+            {{ form.submit(class_="btn btn-success rounded-pill") }}
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      {% for p in posts %}
+      <div class="card rounded-4 shadow-sm mb-3">
+        <div class="card-body">
+          <p class="mb-1">{{ p.body }}</p>
+          <div class="small text-muted">Shared {{ p.created_at.strftime("%b %d, %H:%M") }}</div>
+        </div>
+      </div>
+      {% else %}
+      <div class="text-muted text-center py-5">
+        <i class="bi bi-stars fs-1 d-block mb-2"></i>
+        <p>No posts yet. Be the first to write something kind.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}

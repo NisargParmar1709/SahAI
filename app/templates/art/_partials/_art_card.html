@@ -1,0 +1,11 @@
+<div class="col-6 col-md-4 col-lg-3">
+  <a href="{{ url_for('art.art_detail', asset_id=it.id) }}" class="text-decoration-none">
+    <div class="card rounded-4 shadow-sm hover-zoom">
+      <img src="{{ url_for('static', filename=it.file_path) }}" class="card-img-top rounded-top-4" alt="Artwork thumbnail">
+      <div class="card-body">
+        <div class="small text-muted">{{ it.created_at.strftime("%b %d, %Y") }}</div>
+        {% if it.caption %}<div class="small mt-1">{{ it.caption[:60] }}{% if it.caption|length>60 %}…{% endif %}</div>{% endif %}
+      </div>
+    </div>
+  </a>
+</div>

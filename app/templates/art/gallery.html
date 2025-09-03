@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% set page_title = "My Art Gallery" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h5 m-0"><i class="bi bi-images text-success me-2"></i>My Art</h1>
+    <a href="{{ url_for('art.art_new') }}" class="btn btn-success rounded-pill"><i class="bi bi-plus-circle"></i> New Art</a>
+  </div>
+
+  <div class="row g-3">
+    {% for it in items %}
+      {% include "art/_partials/_art_card.html" %}
+    {% else %}
+      <div class="col-12 text-center text-muted py-5">
+        <i class="bi bi-brush fs-1 d-block mb-2"></i>
+        <p>No artworks yet. Create your first!</p>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

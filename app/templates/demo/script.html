@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set page_title = "Demo Script" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+    <h1 class="h5 m-0"><i class="bi bi-clipboard-check text-success me-2" aria-hidden="true"></i>3-Minute Demo Script</h1>
+    <a href="{{ url_for('demo.demo_auto') }}" class="btn btn-outline-success rounded-pill"><i class="bi bi-play-circle"></i> Auto Demo</a>
+  </div>
+
+  <div class="row g-3">
+    {% for s in steps %}
+      {% set idx = loop.index %}
+      {% include "demo/_partials/_demo_step.html" %}
+    {% endfor %}
+  </div>
+
+  <div class="card rounded-4 shadow-sm mt-4">
+    <div class="card-body">
+      <h2 class="h6">Finish</h2>
+      <p class="mb-2">Close with our tagline: <em>“SahAI 🌱 — Your confidential AI wellness buddy.”</em></p>
+      <a class="btn btn-success rounded-pill" href="{{ url_for('demo.demo_deck') }}"><i class="bi bi-stars"></i> Demo Home</a>
+    </div>
+  </div>
+</main>
+{% endblock %}

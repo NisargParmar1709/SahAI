@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set page_title = "New Future Letter" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card rounded-4 shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h5 mb-3"><i class="bi bi-envelope-plus text-success me-2"></i>Write to Future You</h1>
+          <form method="POST">
+            {{ form.csrf_token }}
+            <div class="mb-3">
+              <label class="form-label" for="{{ form.title.id }}">Title</label>
+              {{ form.title(class_="form-control rounded-3") }}
+              {% for e in form.title.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="{{ form.letter_text.id }}">Letter</label>
+              {{ form.letter_text(class_="form-control rounded-3") }}
+              {% for e in form.letter_text.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="{{ form.open_after.id }}">Open on</label>
+              {{ form.open_after(class_="form-control rounded-3", placeholder="YYYY-MM-DD") }}
+              {% for e in form.open_after.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+            </div>
+            {{ form.submit(class_="btn btn-success rounded-pill px-4") }}
+          </form>
+          <p class="small text-muted mt-3">Locked until the chosen date. Private to you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

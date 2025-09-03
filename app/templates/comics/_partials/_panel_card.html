@@ -1,0 +1,11 @@
+<div class="card rounded-4 shadow-sm h-100 hover-zoom">
+  <img src="{{ url_for('static', filename=it.file_path) }}" class="card-img-top rounded-top-4" alt="Comic panel">
+  <div class="card-body">
+    {% if it.caption %}
+      <div class="fw-semibold">{{ it.caption }}</div>
+    {% endif %}
+    {% if it.meta.script and it.meta.script.dialogue %}
+      <div class="small text-muted mt-1">“{{ it.meta.script.dialogue }}”</div>
+    {% endif %}
+  </div>
+</div>

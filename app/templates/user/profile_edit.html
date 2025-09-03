@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile · SahAI{% endblock %}
+{% block content %}
+<div class="container row my-5 justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-3"><i class="bi bi-pencil"></i> Edit Profile</h1>
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Display name</label>
+              <input type="text" class="form-control" name="display_name" maxlength="120"
+                value="{{ current_user.display_name or '' }}" aria-label="Display name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Preferred language</label>
+              <select class="form-select" name="language" aria-label="Language">
+                <option value="en" {% if current_user.language_pref=='en' %}selected{% endif %}>English</option>
+                <option value="hi" {% if current_user.language_pref=='hi' %}selected{% endif %}>Hindi</option>
+                <option value="hinglish" {% if current_user.language_pref=='hinglish' %}selected{% endif %}>Hinglish
+                </option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Bio</label>
+              <textarea class="form-control" name="bio" rows="3" maxlength="500"
+                aria-label="Bio">{{ current_user.bio or '' }}</textarea>
+              <div class="form-text">Keep it kind & concise (max 500 chars).</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Avatar (PNG/JPG, ≤ 1MB)</label>
+              <input type="file" name="avatar" accept=".png,.jpg,.jpeg" class="form-control">
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remove_avatar" id="remove_avatar">
+                <label for="remove_avatar" class="form-check-label">Remove current avatar</label>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('user.user_profile') }}">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% set page_title = "Journal Details" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card shadow-sm rounded-4 border-0 mb-3">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center justify-content-between">
+            <h1 class="h5 m-0"><i class="bi bi-journal-text text-success me-2"></i>Entry • {{ entry.created_at.strftime('%b %d, %Y') }}</h1>
+            <form method="POST" action="{{ url_for('journal.journal_delete', entry_id=entry.id) }}" onsubmit="return confirm('Delete this entry?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-outline-danger btn-sm rounded-pill"><i class="bi bi-trash"></i> Delete</button>
+            </form>
+          </div>
+
+          <hr>
+
+          <div class="mb-3">
+            <span class="badge rounded-pill bg-secondary me-1">
+              {% if entry.raw_text %}raw + summary{% else %}summary-only{% endif %}
+            </span>
+          </div>
+
+          {% if entry.raw_text %}
+          <details class="mb-3">
+            <summary class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-eye"></i> View Raw Entry (private)</summary>
+            <div class="mt-2 p-3 bg-light rounded-3">{{ entry.raw_text|e }}</div>
+          </details>
+          {% endif %}
+
+          {% if entry.ai_summary %}
+          <div class="mb-3">
+            <h2 class="h6 text-muted mb-2"><i class="bi bi-stars me-1"></i>AI Summary</h2>
+            <p class="lead">{{ entry.ai_summary }}</p>
+          </div>
+          {% endif %}
+
+          {% if emotions %}
+          <div class="mb-2">
+            <h2 class="h6 text-muted mb-2"><i class="bi bi-emoji-smile me-1"></i>Detected Emotions</h2>
+            {% for e in emotions %}
+              <span class="emotion-chip">{{ e }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if keywords %}
+          <div class="mb-2">
+            <h2 class="h6 text-muted mb-2"><i class="bi bi-tags me-1"></i>Keywords</h2>
+            {% for k in keywords %}
+              <span class="keyword-chip">{{ k }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="text-end">
+        <a class="btn btn-outline-success rounded-pill" href="{{ url_for('journal.journal_emotion_lens') }}">
+          <i class="bi bi-arrow-left"></i> Back to list
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

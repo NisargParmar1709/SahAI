@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% set page_title = "Future Letters" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h5 m-0"><i class="bi bi-envelope text-success me-2"></i>Your Letters</h1>
+    <a href="{{ url_for('letters.letters_new') }}" class="btn btn-success rounded-pill"><i class="bi bi-plus-circle"></i> New Letter</a>
+  </div>
+
+  <div class="row g-3">
+    {% for it in items %}
+    <div class="col-md-6">
+      <a href="{{ url_for('letters.letters_detail', letter_id=it.id) }}" class="text-decoration-none">
+        <div class="card rounded-4 shadow-sm h-100 hover-raise">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 class="h6 m-0">{{ it.title }}</h2>
+              {% if now >= it.open_after %}
+                <span class="badge bg-success rounded-pill">Open</span>
+              {% else %}
+                <span class="badge bg-secondary rounded-pill">Locked</span>
+              {% endif %}
+            </div>
+            <div class="small text-muted mt-2">Opens on {{ it.open_after.strftime("%b %d, %Y") }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% else %}
+    <div class="col-12 text-center text-muted py-5">
+      <i class="bi bi-envelope-paper fs-1 d-block mb-2"></i>
+      <p>No letters yet. Write one to your future self!</p>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

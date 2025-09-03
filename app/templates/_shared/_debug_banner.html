@@ -1,0 +1,7 @@
+{% if config.LOG_LEVEL == 'DEBUG' %}
+<div class="alert alert-warning small py-1 px-2 mt-3 mb-0" style="position:fixed;bottom:0;right:0;z-index:1030;">
+  <strong>DEBUG</strong>
+  req: {{ g.request_id }}
+  user: {{ (current_user.id|string)|hash if current_user.is_authenticated else 'anon' }}
+</div>
+{% endif %}

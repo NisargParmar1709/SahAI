@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% set page_title = 'Error' %}
+{% block content %}
+<main class="container py-5">
+  <div class="text-center">
+    <h1 class="display-6 text-danger mb-3">Something went wrong</h1>
+    <p class="lead">We couldn't complete that action just now.</p>
+    <p class="text-muted">Request ID: <code>{{ request_id }}</code></p>
+    <a href="/" class="btn btn-outline-success rounded-pill mt-3">Go Home</a>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set page_title = "Screenshot Helper" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+    <h1 class="h5 m-0"><i class="bi bi-camera text-success me-2" aria-hidden="true"></i>Screenshot Export</h1>
+    <div class="d-flex gap-2">
+      <select id="pageSelect" class="form-select form-select-sm rounded-pill" style="min-width: 260px" aria-label="Select a page to capture">
+        {% for s in steps %}
+          <option value="{{ s.href }}" {% if s.href == path %}selected{% endif %}>{{ loop.index }}. {{ s.title }}</option>
+        {% endfor %}
+      </select>
+      <button id="goBtn" class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-arrow-repeat"></i> Load</button>
+      <button id="shotBtn" class="btn btn-success btn-sm rounded-pill"><i class="bi bi-download"></i> Capture PNG</button>
+    </div>
+  </div>
+
+  <div class="ratio ratio-16x9 rounded-4 border shadow-sm mb-2">
+    <iframe id="shotFrame" src="{{ path }}" title="Preview" class="rounded-4"></iframe>
+  </div>
+  <p class="small text-muted">Tip: Navigate within the iframe to the exact view you want, then click “Capture PNG”.</p>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<!-- html2canvas CDN -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha256-jcQ4pQ0hB4IY0l2o1b+JwN6n0+E6tE0w4b+o2hWj7V4=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/screenshot.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,303 @@
+c:/Users/MASTER/OneDrive/Desktop/shaAI project/SahAI/
+├── .env
+├── .env.development
+├── .env.example
+├── .env.production
+├── .env.testing
+├── .pytest_cache/
+│   ├── .gitignore
+│   ├─] CACHEDIR.TAG (ignored)
+│   ├─] README.md (ignored)
+│   └─] v/ (ignored)
+├── app/
+│   ├── ai/
+│   │   ├── exceptions.py
+│   │   ├── gemini_client.py
+│   │   ├── health.py
+│   │   ├── prompt_library.py
+│   │   ├── safety.py
+│   │   ├── schemas.py
+│   │   ├── tasks.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── exceptions.cpython-312.pyc
+│   │       ├── gemini_client.cpython-312.pyc
+│   │       ├── health.cpython-312.pyc
+│   │       ├── prompt_library.cpython-312.pyc
+│   │       ├── safety.cpython-312.pyc
+│   │       ├── schemas.cpython-312.pyc
+│   │       ├── tasks.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── art/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── services.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       ├── services.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── auth/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── cli/
+│   │   ├── pitch.py
+│   │   ├── pitch_full.py
+│   │   └── __pycache__/
+│   │       ├── pitch.cpython-312.pyc
+│   │       └── pitch_full.cpython-312.pyc
+│   ├── comics/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── services.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       ├── services.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── debug_tools.py
+│   ├── demo/
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── errors/
+│   │   ├── handlers.py
+│   │   └── __pycache__/
+│   │       └── handlers.cpython-312.pyc
+│   ├── exam/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── extensions.py
+│   ├── gratitude/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── journal/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── letters/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── logging_config.py
+│   ├── logging_sanitize.py
+│   ├── main/
+│   │   ├── routes.py
+│   │   └── __pycache__/
+│   │       └── routes.cpython-312.pyc
+│   ├── middleware/
+│   │   ├── request_ids.py
+│   │   └── __pycache__/
+│   │       └── request_ids.cpython-312.pyc
+│   ├── models.py
+│   ├── music/
+│   │   ├── routes.py
+│   │   ├── services.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── routes.cpython-312.pyc
+│   │       ├── services.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── peer/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── questions/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── routes.py
+│   ├── services/
+│   │   ├── db_helpers.py
+│   │   ├── pagination.py
+│   │   ├── seed_data.py
+│   │   └── __pycache__/
+│   │       ├── db_helpers.cpython-312.pyc
+│   │       ├── pagination.cpython-312.pyc
+│   │       └── seed_data.cpython-312.pyc
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── custom.css
+│   │   ├── img/
+│   │   │   └── logo.svg
+│   │   ├── js/
+│   │   │   ├── copy_to_clipboard.js
+│   │   │   ├── custom.js
+│   │   │   ├── demo_auto.js
+│   │   │   ├── doodle_canvas.js
+│   │   │   ├── emotion_charts.js
+│   │   │   ├── gallery.js
+│   │   │   ├── journal_voice.js
+│   │   │   ├── letter_unlock.js
+│   │   │   ├── screenshot.js
+│   │   │   ├── timer.js
+│   │   │   ├── tree.js
+│   │   │   └── tts.js
+│   │   └── uploads/
+│   │       ├── doodle_09278ef8b27ffce1.png
+│   │       └── WhatsApp_Image_2025-_0778274bf1f4.jpeg
+│   ├── templates/
+│   │   ├── 404.html
+│   │   ├── 500.html
+│   │   ├── art/
+│   │   │   ├── detail.html
+│   │   │   ├── gallery.html
+│   │   │   ├── new.html
+│   │   │   └── _partials/
+│   │   │       └── _art_card.html
+│   │   ├── auth/
+│   │   │   ├── forgot_password.html
+│   │   │   ├── login.html
+│   │   │   ├── register.html
+│   │   │   └── reset_password.html
+│   │   ├── base.html
+│   │   ├── comics/
+│   │   │   ├── detail.html
+│   │   │   ├── new.html
+│   │   │   └── _partials/
+│   │   │       └── _panel_card.html
+│   │   ├── dashboard/
+│   │   │   └── emotion_lens.html
+│   │   ├── demo/
+│   │   │   ├── auto.html
+│   │   │   ├── deck.html
+│   │   │   ├── index.html
+│   │   │   ├── screenshot.html
+│   │   │   ├── script.html
+│   │   │   └── _partials/
+│   │   │       └── _demo_step.html
+│   │   ├── error.html
+│   │   ├── errors/
+│   │   │   ├── 404.html
+│   │   │   └── 500.html
+│   │   ├── exam/
+│   │   │   ├── copilot.html
+│   │   │   └── _partials/
+│   │   │       └── _crisis_ribbon.html
+│   │   ├── gratitude/
+│   │   │   ├── index.html
+│   │   │   └── _partials/
+│   │   │       └── _tree_svg.html
+│   │   ├── home.html
+│   │   ├── journal/
+│   │   │   ├── detail.html
+│   │   │   ├── list.html
+│   │   │   ├── new.html
+│   │   │   └── _partials/
+│   │   │       ├── _entry_card.html
+│   │   │       └── _grounding_modal.html
+│   │   ├── letters/
+│   │   │   ├── detail.html
+│   │   │   ├── list.html
+│   │   │   └── new.html
+│   │   ├── main/
+│   │   │   └── about.html
+│   │   ├── music/
+│   │   │   ├── recommend.html
+│   │   │   └── _playlist_card.html
+│   │   ├── peer/
+│   │   │   └── wall.html
+│   │   ├── questions/
+│   │   │   ├── ask.html
+│   │   │   ├── detail.html
+│   │   │   ├── list.html
+│   │   │   └── _answer_card.html
+│   │   ├── user/
+│   │   │   ├── change_password.html
+│   │   │   ├── privacy.html
+│   │   │   ├── profile.html
+│   │   │   └── profile_edit.html
+│   │   ├── wellness/
+│   │   │   ├── doodle_detail.html
+│   │   │   ├── doodle_new.html
+│   │   │   ├── meditation.html
+│   │   │   ├── prompts.html
+│   │   │   ├── story.html
+│   │   │   └── _partials/
+│   │   │       ├── _mood_chips.html
+│   │   │       ├── _prompt_card.html
+│   │   │       ├── _story_card.html
+│   │   │       ├── _timer_widget.html
+│   │   │       └── _tts_controls.html
+│   │   └── _shared/
+│   │       ├── _debug_banner.html
+│   │       ├── _skip_to_content.html
+│   │       └── _toasts.html
+│   ├── user/
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── utils/
+│   │   ├── hash.py
+│   │   ├── mood_resolver.py
+│   │   ├── tracing.py
+│   │   └── __pycache__/
+│   │       ├── hash.cpython-312.pyc
+│   │       ├── mood_resolver.cpython-312.pyc
+│   │       └── tracing.cpython-312.pyc
+│   ├── wellness/
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── __init__.py
+│   │   └── __pycache__/
+│   │       ├── forms.cpython-312.pyc
+│   │       ├── routes.cpython-312.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── __init__.py
+│   └── __pycache__/
+│       ├── debug_tools.cpython-312.pyc
+│       ├── extensions.cpython-312.pyc
+│       ├── logging_config.cpython-312.pyc
+│       ├── logging_sanitize.cpython-312.pyc
+│       ├── models.cpython-312.pyc
+│       ├── routes.cpython-312.pyc
+│       └── __init__.cpython-312.pyc
+├── app.py
+├── config.py
+├── instance/
+│   └── sahai.db
+├── logs/
+│   └── sahai.log
+├── README.md
+├── requirements.txt
+├── tests/
+│   ├── test_journal_smoke.py
+│   └── __pycache__/
+│       └── test_journal_smoke.cpython-312-pytest-7.4.4.pyc

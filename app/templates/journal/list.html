@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% set page_title = "My Journal" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h4 m-0"><i class="bi bi-journals text-success me-2"></i>My Entries</h1>
+    <a href="{{ url_for('journal.journal_new') }}" class="btn btn-success rounded-pill"><i class="bi bi-plus-circle"></i> New</a>
+  </div>
+
+  {% if pagination.items %}
+  <div class="row g-3">
+    {% for entry in pagination.items if not entry.is_deleted %}
+      {% include "journal/_partials/_entry_card.html" %}
+    {% endfor %}
+  </div>
+  <div class="mt-4 d-flex justify-content-center">
+    <nav aria-label="Journal pagination">
+      <ul class="pagination">
+        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+          <a class="page-link" href="{{ url_for('journal.journal_list', page=pagination.prev_num or 1) }}">Prev</a>
+        </li>
+        <li class="page-item disabled"><span class="page-link">Page {{ pagination.page }} / {{ pagination.pages }}</span></li>
+        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+          <a class="page-link" href="{{ url_for('journal.journal_list', page=pagination.next_num or pagination.page) }}">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  {% else %}
+    <div class="text-center py-5">
+      <div class="display-6">No entries yet</div>
+      <p class="text-muted">Your reflections will appear here. Ready to start?</p>
+      <a href="{{ url_for('journal.journal_new') }}" class="btn btn-success rounded-pill"><i class="bi bi-plus-circle"></i> Write your first entry</a>
+    </div>
+  {% endif %}
+</main>
+{% endblock %}

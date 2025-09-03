@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Privacy Settings · SahAI{% endblock %}
+{% block content %}
+<div class="container row my-5 justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-3"><i class="bi bi-shield-check"></i> Privacy & Consent</h1>
+        <form method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="consent_analytics" id="consent_analytics"
+                   {% if current_user.consent_analytics %}checked{% endif %}>
+            <label for="consent_analytics" class="form-check-label">
+              Allow anonymous analytics to improve SahAI
+            </label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="consent_research" id="consent_research"
+                   {% if current_user.consent_research %}checked{% endif %}>
+            <label for="consent_research" class="form-check-label">
+              Contribute to privacy-preserving mental wellness research
+            </label>
+          </div>
+          <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save</button>
+          <a class="btn btn-outline-secondary" href="{{ url_for('user.user_profile') }}">Back to profile</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

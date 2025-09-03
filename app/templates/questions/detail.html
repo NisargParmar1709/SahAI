@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% set page_title = "Answer" %}
+{% block content %}
+<main id="main-content" class="container py-4 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card rounded-4 shadow-sm border-0">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center justify-content-between">
+            <h1 class="h5 m-0"><i class="bi bi-envelope-open text-success me-2"></i>Anonymous Question</h1>
+            <a class="btn btn-outline-success btn-sm rounded-pill" href="{{ url_for('questions.questions_ask') }}"><i class="bi bi-arrow-left"></i> Back</a>
+          </div>
+          <hr>
+          <p class="mb-3"><strong>Q:</strong> {{ item.question_text }}</p>
+
+          {% if item.status == 'flagged' %}
+            <div class="alert alert-warning rounded-3">
+              <i class="bi bi-exclamation-triangle me-2"></i>
+              This question was flagged for safety. We’re here to support you — try rephrasing it kindly, or visit resources.
+            </div>
+          {% elif item.status == 'answered' %}
+            {% include "questions/_answer_card.html" %}
+          {% else %}
+            <div class="alert alert-secondary">This item is pending.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

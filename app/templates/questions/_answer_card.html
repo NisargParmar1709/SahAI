@@ -1,0 +1,11 @@
+<div class="answer-card p-3 rounded-3 bg-light border">
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <span class="badge bg-success rounded-pill">{{ item.language or 'en' }}</span>
+    <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="copyText('#answerBody')" aria-label="Copy answer">
+      <i class="bi bi-clipboard"></i> Copy
+    </button>
+  </div>
+  <div id="answerBody">{{ item.ai_answer_text|safe }}</div>
+  <div class="small text-muted mt-2">Supportive guidance, not medical advice.</div>
+</div>
+<script src="{{ url_for('static', filename='js/copy_to_clipboard.js') }}"></script>

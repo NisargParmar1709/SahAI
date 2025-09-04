@@ -2,30 +2,56 @@ from __future__ import annotations
 from typing import Dict, List, Optional, Tuple
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 
-def _clean_schema(schema: dict) -> dict:
+def _clean_schema(schema: dict, *, in_properties: bool = False) -> dict:
+    """
+    Cleans Pydantic/JSON schema for Gemini models.
+    Keeps only fields supported by Gemini (type, properties, items, required).
+    Special handling for 'scores' object and nested refs.
+    """
     if isinstance(schema, dict):
         cleaned = {}
         for k, v in schema.items():
+            # Strip unsupported fields globally
             if k in (
                 "title", "description", "$schema",
                 "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
-                "default", "examples", "additionalProperties"
+                "default", "examples", "additionalProperties",
+                "$defs", "$ref"
             ):
                 continue
-            cleaned[k] = _clean_schema(v)
 
-        # Special handling for `scores`
-        if schema.get("type") == "object" and "scores" in schema.get("title", "").lower():
-            allowed_emotions = [
-                "calm", "anxious", "sad", "angry",
-                "hopeful", "tired", "stressed", "motivated"
-            ]
-            cleaned["properties"] = {
-                emo: {"type": "number"} for emo in allowed_emotions
-            }
+            if k == "properties":
+                props = {}
+                for prop_name, prop_schema in v.items():
+                    props[prop_name] = _clean_schema(prop_schema, in_properties=True)
+
+                    # Special case: scores object must declare fixed properties
+                    if prop_name == "scores" and props[prop_name].get("type") == "object":
+                        allowed_emotions = [
+                            "calm", "anxious", "sad", "angry",
+                            "hopeful", "tired", "stressed", "motivated"
+                        ]
+                        props[prop_name]["properties"] = {
+                            emo: {"type": "number"} for emo in allowed_emotions
+                        }
+                cleaned["properties"] = props
+
+            elif k == "items":
+                cleaned[k] = _clean_schema(v, in_properties=True)
+
+            elif k == "required":
+                # Ensure required list only includes keys that exist in properties
+                props = schema.get("properties", {})
+                cleaned[k] = [r for r in v if r in props]
+
+            else:
+                cleaned[k] = _clean_schema(v, in_properties=in_properties)
+
         return cleaned
+
     elif isinstance(schema, list):
-        return [_clean_schema(v) for v in schema]
+        return [_clean_schema(v, in_properties=in_properties) for v in schema]
+
     return schema
 
 class EmotionAnalysis(BaseModel):

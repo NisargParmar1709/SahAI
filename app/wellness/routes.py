@@ -179,7 +179,8 @@ def doodle_new():
         db.session.commit()
 
         flash("Saved your doodle 🎨", "success")
-        return redirect(url_for("wellness.doodle_detail", doodle_id=doodle.id))
+        return redirect(url_for("wellness.wellness_doodle_detail", doodle_id=doodle.id))
+
 
     return render_template("wellness/doodle_new.html", form=form)
 

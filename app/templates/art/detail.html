@@ -12,7 +12,7 @@
             <p>{{item.file_path}}</p>
           </div>
           {% if item.caption %}<p class="lead">{{ item.caption }}</p>{% endif %}
-          <a download class="btn btn-outline-success rounded-pill" href="{{ url_for('static', filename='uploads/' + asset.file_path.split('/')[-1]) }}">
+          <a download class="btn btn-outline-success rounded-pill" href="{{ url_for('static', filename='uploads/' + item.file_path.split('/')[-1]) }}">
             <i class="bi bi-download"></i> Download
           </a>
         </div>
